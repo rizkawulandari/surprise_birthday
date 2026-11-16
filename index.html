@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="A Little Universe for You — An interactive romantic birthday surprise website for Mas 🤍">
+  <meta name="theme-color" content="#10172B">
+  
+  <title>A Little Universe for You — Tonight, the universe celebrates you</title>
+
+  <!-- Google Fonts: Cormorant Garamond (Serif), Plus Jakarta Sans (Sans-serif), Caveat (Handwritten) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================
+       BACKGROUND CANVAS: Animated Stars, Constellations & Meteors
+       ======================================================== -->
+  <canvas id="universe-canvas" aria-hidden="true"></canvas>
+  <div class="nebula-glow" aria-hidden="true"></div>
+
+  <!-- Subtle Desktop Custom Cursor Glow -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ========================================================
+       FLOATING AUDIO CONTROLLER
+       ======================================================== -->
+  <div class="audio-control-container">
+    <button id="music-toggle" class="music-toggle-btn" aria-label="Toggle background music" title="Toggle romantic background music">
+      <div class="music-icon-wrapper">
+        <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+      </div>
+      <div class="equalizer-bars" aria-hidden="true">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+        <span class="bar bar-4"></span>
+      </div>
+      <span class="music-label">Music</span>
+    </button>
+  </div>
+
+  <!-- Audio Element: Local MP3 / WAV support with graceful Web Audio API fallback -->
+  <audio id="bg-music" preload="auto" loop>
+    <source src="assets/audio/birthday-music.mp3" type="audio/mpeg">
+    <source src="assets/audio/birthday-music.wav" type="audio/wav">
+  </audio>
+
+  <!-- ========================================================
+       SIDE PROGRESS / NAVIGATION DOTS
+       ======================================================== -->
+  <nav class="side-nav" aria-label="Section Navigation">
+    <button class="nav-dot active" data-target="section-secret" aria-label="The Secret Beginning">
+      <span class="nav-tooltip">The Secret</span>
+    </button>
+    <button class="nav-dot" data-target="section-birthday" aria-label="The Special Day">
+      <span class="nav-tooltip">Special Day</span>
+    </button>
+    <button class="nav-dot" data-target="section-memories" aria-label="A Little Collection of You">
+      <span class="nav-tooltip">Memories</span>
+    </button>
+    <button class="nav-dot" data-target="section-letter" aria-label="A Letter for You">
+      <span class="nav-tooltip">Letter</span>
+    </button>
+    <button class="nav-dot" data-target="section-wishes" aria-label="My Wishes for You">
+      <span class="nav-tooltip">Wishes</span>
+    </button>
+    <button class="nav-dot" data-target="section-final" aria-label="One Last Thing">
+      <span class="nav-tooltip">One Last Thing</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================
+       MAIN IMMERSIVE SECTIONS
+       ======================================================== -->
+  <main id="universe-main">
+
+    <!-- =====================================================
+         SECTION 1 — THE SECRET BEGINNING
+         Full-screen midnight sky, glowing moon, gentle fade-in
+         ===================================================== -->
+    <section id="section-secret" class="section section-fullscreen section-active">
+      <div class="celestial-moon-container" aria-hidden="true">
+        <div class="crescent-moon"></div>
+        <div class="moon-halo"></div>
+      </div>
+
+      <div class="section-content text-center">
+        <div class="opening-badge">
+          <span class="starlight-icon">✦</span>
+          <span>A Little Universe for You</span>
+          <span class="starlight-icon">✦</span>
+        </div>
+
+        <h1 class="opening-title">
+          <span class="fade-line line-1">Hey, Mas...</span>
+          <span class="fade-line line-2">There's something I've been preparing for you.</span>
+          <span class="fade-line line-3">Tonight is a little different.</span>
+        </h1>
+
+        <div class="cta-wrapper">
+          <button id="btn-open-surprise" class="btn-celestial">
+            <span class="btn-sparkle" aria-hidden="true">✦</span>
+            <span class="btn-text">Open Your Little Surprise</span>
+            <span class="btn-glow" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <p class="audio-hint">
+          <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+          Best experienced with sound on
+        </p>
+      </div>
+
+      <div class="scroll-down-indicator" aria-hidden="true">
+        <div class="mouse-icon">
+          <div class="wheel"></div>
+        </div>
+        <span class="scroll-text">Scroll to explore</span>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 2 — THE SPECIAL DAY
+         Cinematic birthday reveal, golden particles, soft confetti
+         ===================================================== -->
+    <section id="section-birthday" class="section section-fullscreen">
+      <div class="birthday-confetti-canvas-container" aria-hidden="true">
+        <canvas id="birthday-confetti-canvas"></canvas>
+      </div>
+
+      <div class="section-content text-center">
+        <!-- EDITABLE: Birthday Date -->
+        <div class="date-badge reveal-item">
+          <span class="badge-line"></span>
+          <span class="badge-text">19 NOVEMBER 2026</span>
+          <span class="badge-line"></span>
+        </div>
+
+        <h2 class="birthday-main-heading reveal-item">
+          HAPPY BIRTHDAY
+        </h2>
+
+        <!-- EDITABLE: Recipient Name -->
+        <div class="recipient-name-container reveal-item">
+          <div class="recipient-glow-backdrop" aria-hidden="true"></div>
+          <h3 class="recipient-name">Mas 🤍</h3>
+        </div>
+
+        <p class="birthday-subtitle reveal-item">
+          "To someone who makes ordinary moments feel a little more special."
+        </p>
+
+        <div class="tagline-container reveal-item">
+          <div class="golden-sparkle-divider">
+            <span class="sparkle">✧</span>
+            <span class="divider-line"></span>
+            <span class="sparkle-center">✦</span>
+            <span class="divider-line"></span>
+            <span class="sparkle">✧</span>
+          </div>
+          <p class="birthday-tagline">Tonight, the universe celebrates you.</p>
+        </div>
+
+        <div class="interactive-sparkle-prompt reveal-item">
+          <button id="btn-burst-stars" class="btn-subtle" title="Tap for more starlight">
+            <span class="star-icon">✨</span> Touch
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 3 — A LITTLE COLLECTION OF YOU
+         Polaroid photo gallery with gentle float and lightbox
+         ===================================================== -->
+    <section id="section-memories" class="section">
+      <div class="section-content">
+        <div class="section-header text-center reveal-item">
+          <div class="header-eyebrow">
+            <span class="starlight-icon">✦</span> MEMORY VAULT <span class="starlight-icon">✦</span>
+          </div>
+          <!-- SECTION HEADING -->
+          <h2 class="section-title">Little Things I Want to Remember</h2>
+          <!-- SUBTITLE -->
+          <p class="section-subtitle">
+            "Some moments don't need to be extraordinary to become unforgettable."
+          </p>
+        </div>
+
+        <!-- ===================================================
+             POLAROID GALLERY
+             Easily customize photos by swapping files in assets/images/
+             or editing the captions below!
+             =================================================== -->
+        <div class="polaroid-grid">
+
+          <!-- Polaroid 1 -->
+          <article class="polaroid-card polaroid-1 reveal-item" tabindex="0" role="button" aria-label="View photo: Night walks under city lights" data-photo-src="assets/images/photo-1.jpg" data-caption="Langkah santai di bawah lampu malam, saat cerita-cerita kecil kita terasa paling hangat." data-tag="Under the warm city lights">
+            <div class="polaroid-pin" aria-hidden="true"></div>
+            <div class="polaroid-tape" aria-hidden="true"></div>
+            <div class="polaroid-image-frame">
+              <img src="assets/images/photo-1.jpg" alt="Langkah santai di bawah lampu malam bersama Mas" loading="lazy">
+              <div class="polaroid-glare" aria-hidden="true"></div>
+            </div>
+            <div class="polaroid-content">
+              <p class="polaroid-caption">Saat cerita kecil kita terasa paling hangat.</p>
+              <span class="polaroid-tag"></span>
+            </div>
+          </article>
+
+          <!-- Polaroid 2 -->
+          <article class="polaroid-card polaroid-2 reveal-item" tabindex="0" role="button" aria-label="View photo: Reaching the summit with a bright smile" data-photo-src="assets/images/photo-2.jpg" data-caption="Di puncak tertinggi dengan senyum paling cerah. Selalu bangga melihat setiap langkah perjuanganmu." data-tag="Kerinci, 3805 MDPL">
+            <div class="polaroid-pin" aria-hidden="true"></div>
+            <div class="polaroid-tape tape-alt" aria-hidden="true"></div>
+            <div class="polaroid-image-frame">
+              <img src="assets/images/photo-2.jpg" alt="Mas di puncak Kerinci 3805 MDPL dengan latar matahari terbit" loading="lazy">
+              <div class="polaroid-glare" aria-hidden="true"></div>
+            </div>
+            <div class="polaroid-content">
+              <p class="polaroid-caption">Selalu bangga melihat setiap langkah perjuanganmu.</p>
+              <span class="polaroid-tag"></span>
+            </div>
+          </article>
+
+          <!-- Polaroid 3 -->
+          <article class="polaroid-card polaroid-3 reveal-item" tabindex="0" role="button" aria-label="View photo: Finding joy in simple moments" data-photo-src="assets/images/photo-3.jpg" data-caption="Menemukan bahagia dalam hal-hal sederhana—selama ada kamu di sampingku." data-tag="Every ordinary moment">
+            <div class="polaroid-pin" aria-hidden="true"></div>
+            <div class="polaroid-tape" aria-hidden="true"></div>
+            <div class="polaroid-image-frame">
+              <img src="assets/images/photo-3.jpg" alt="Momen manis dan senyuman tulus bersama Mas" loading="lazy">
+              <div class="polaroid-glare" aria-hidden="true"></div>
+            </div>
+            <div class="polaroid-content">
+              <p class="polaroid-caption">Senang rasanya jika kamu di sampingku.</p>
+              <span class="polaroid-tag">Every little moment ✨</span>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="gallery-hint text-center reveal-item">
+          <span class="hint-star">✦</span> Click or tap any photo to view closer <span class="hint-star">✦</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 4 — A LETTER FOR YOU
+         Emotional centerpiece: Interactive 3D Envelope & Wax Seal
+         ===================================================== -->
+    <section id="section-letter" class="section">
+      <div class="section-content">
+        <div class="section-header text-center reveal-item">
+          <div class="header-eyebrow">
+            <span class="starlight-icon">✦</span> FROM MY HEART <span class="starlight-icon">✦</span>
+          </div>
+          <h2 class="section-title">A Letter for You</h2>
+          <p class="section-subtitle">
+            Ada beberapa kata yang ingin kutitipkan di hari istimewamu...
+          </p>
+        </div>
+
+        <!-- Interactive Envelope Presentation -->
+        <div class="envelope-experience reveal-item">
+          
+          <!-- Outer Envelope Element -->
+          <div id="envelope-wrapper" class="envelope-wrapper" tabindex="0" role="button" aria-label="Buka amplop surat" aria-expanded="false">
+            
+            <div class="envelope-glow" aria-hidden="true"></div>
+
+            <div class="envelope-container">
+              <!-- Back pocket -->
+              <div class="envelope-back"></div>
+
+              <!-- Sliding Letter Paper -->
+              <div id="letter-sheet" class="letter-sheet" aria-hidden="true">
+                <div class="letter-texture-overlay"></div>
+                <div class="letter-header-ornament">
+                  <span class="ornament-curve">❧</span>
+                  <span class="ornament-dot">✦</span>
+                  <span class="ornament-curve">☙</span>
+                </div>
+
+                <div class="letter-inner-content">
+                  <!-- EDITABLE: Letter Content -->
+                  <p class="letter-salutation">Mas,</p>
+
+                  <p class="letter-body-p p-1">
+                    Mungkin tidak semua hal bisa ku ungkapkan secara langsung. Ada begitu banyak hal kecil tentang dirimu yang mungkin terlihat sederhana, tetapi menjadi sesuatu yang berarti.
+                  </p>
+
+                  <p class="letter-body-p p-2">
+                    Hari ini, aku mau kamu tau bahwa kehadiranmu adalah segala hal yang patut disyukuri.
+                  </p>
+
+                  <p class="letter-body-p p-3">
+                    Terima kasih sudah jadi dirimu sendiri. Terima kasih untuk setiap cerita, tawa, perhatian, dan hal-hal sederhana yang mungkin tidak pernah kamu sadari begitu berarti.
+                  </p>
+
+                  <p class="letter-body-p p-4 letter-highlight">
+                    I hope life treats you gently.
+                  </p>
+
+                  <p class="letter-body-p p-5">
+                    Semoga langkahmu selalu dikuatkan, impianmu menemukan jalannya, dan hatimu tidak pernah kehilangan alasan untuk bahagia.
+                  </p>
+
+                  <p class="letter-closing">
+                    Happy birthday, Mas. 🤍
+                  </p>
+                </div>
+
+                <div class="letter-footer-note">
+                  <span>Written with all my heart</span>
+                  <span class="footer-heart">🤍</span>
+                </div>
+              </div>
+
+              <!-- Top Flap with 3D Fold -->
+              <div id="envelope-flap" class="envelope-flap">
+                <div class="flap-triangle"></div>
+              </div>
+
+              <!-- Front Pockets -->
+              <div class="envelope-pocket-left"></div>
+              <div class="envelope-pocket-right"></div>
+              <div class="envelope-pocket-bottom"></div>
+
+              <!-- Wax Seal Button -->
+              <div id="wax-seal" class="wax-seal" title="Click to break the seal and read">
+                <div class="wax-seal-inner">
+                  <span class="seal-heart">🤍</span>
+                  <span class="seal-monogram">M</span>
+                </div>
+                <div class="wax-ring"></div>
+              </div>
+            </div>
+
+            <div class="envelope-prompt-text">
+              <span class="prompt-icon">💌</span>
+              <span id="envelope-action-text">Click the wax seal to open</span>
+            </div>
+          </div>
+
+          <!-- Controls to fold/unfold when open -->
+          <div id="letter-controls" class="letter-controls hidden">
+            <button id="btn-toggle-envelope" class="btn-subtle">
+              <span class="btn-icon">✉️</span> Close Letter
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 5 — MY WISHES FOR YOU
+         Interactive floating constellation cards with gentle scroll
+         ===================================================== -->
+    <section id="section-wishes" class="section">
+      <div class="section-content">
+        <div class="section-header text-center reveal-item">
+          <div class="header-eyebrow">
+            <span class="starlight-icon">✦</span> WHISPERS <span class="starlight-icon">✦</span>
+          </div>
+          <!-- SECTION HEADING -->
+          <h2 class="section-title">My Wishes for You</h2>
+          <!-- SUBTITLE -->
+          <p class="section-subtitle">
+            Doa-doa tulus yang kulangitkan untukmu, hari ini dan selamanya.
+          </p>
+        </div>
+
+        <div class="wishes-grid">
+
+          <!-- Wish 1 -->
+          <div class="wish-card reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">✨</span>
+              </div>
+              <p class="wish-text">
+                "May your dreams find their way home."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Semoga setiap impianmu menemukan jalan terindahnya</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wish 2 -->
+          <div class="wish-card reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">🛡️</span>
+              </div>
+              <p class="wish-text">
+                "May you always find strength in difficult times."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Kuat dan tegar dalam setiap ombak kehidupan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wish 3 -->
+          <div class="wish-card reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">🕊️</span>
+              </div>
+              <p class="wish-text">
+                "May your heart remain kind, even when the world feels unkind."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Tetap menjadi pribadi yang hangat dan berhati lembut</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wish 4 -->
+          <div class="wish-card reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">🌟</span>
+              </div>
+              <p class="wish-text">
+                "May every effort bring you closer to the life you dream of."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Setiap tetes lelahmu membuahkan hasil yang berkah</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wish 5 -->
+          <div class="wish-card reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">🌱</span>
+              </div>
+              <p class="wish-text">
+                "May happiness find you in the smallest things."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Menemukan senyuman di antara hal-hal sederhana</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wish 6 (Spiritual / Islamic blessing) -->
+          <div class="wish-card wish-card-featured reveal-item" tabindex="0">
+            <div class="wish-card-glow" aria-hidden="true"></div>
+            <div class="wish-card-inner">
+              <div class="wish-card-header">
+                <span class="constellation-symbol">✧</span>
+                <span class="wish-starlight">🤲 🤍</span>
+              </div>
+              <p class="wish-text wish-text-special">
+                "Semoga Allah selalu menjaga langkahmu, melapangkan urusanmu, dan memberikan keberkahan dalam setiap perjalanan hidupmu."
+              </p>
+              <div class="wish-footer">
+                <span class="wish-subtext">Aamiin ya Rabbal 'Alamin</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 6 — ONE LAST THING
+         Final cinematic scene, glowing moon, glowing heart & replay
+         ===================================================== -->
+    <section id="section-final" class="section section-fullscreen">
+      <div class="section-content text-center">
+        
+        <div class="final-moon-halo" aria-hidden="true"></div>
+
+        <div class="final-lines-container">
+          <p class="final-lead reveal-item">
+            One more thing, Mas...
+          </p>
+
+          <blockquote class="final-quote reveal-item">
+            "If I could give you one thing today, it would be the ability to see yourself through my eyes."
+          </blockquote>
+
+          <p class="final-subquote reveal-item">
+            "So you would know just how wonderful you are."
+          </p>
+
+          <div class="final-celebration-title reveal-item">
+            <span class="highlight-line">Happy Birthday, my favorite person.</span>
+          </div>
+
+          <p class="final-future-toast reveal-item">
+            "Here's to more stories, more laughter, and more beautiful tomorrows."
+          </p>
+
+          <div class="final-signoff reveal-item">
+            <p class="signoff-text">With love, always. 🤍</p>
+          </div>
+
+          <!-- Glowing Heart Animation -->
+          <div class="glowing-heart-wrapper reveal-item">
+            <div class="glowing-heart" aria-hidden="true">
+              <svg viewBox="0 0 32 29.6" class="heart-svg">
+                <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+              </svg>
+              <div class="heart-pulse-wave"></div>
+            </div>
+          </div>
+
+          <!-- Replay Experience Button -->
+          <div class="replay-wrapper reveal-item">
+            <button id="btn-replay" class="btn-celestial">
+              <span class="btn-sparkle" aria-hidden="true">↺</span>
+              <span class="btn-text">Replay This Little Universe</span>
+              <span class="btn-glow" aria-hidden="true"></span>
+            </button>
+          </div>
+
+        </div>
+
+        <footer class="universe-footer">
+          <p>Created with love especially for you Mas🤍  November 19, 2026</p>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MODAL LIGHTBOX FOR POLAROIDS
+       ======================================================== -->
+  <div id="photo-modal" class="photo-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo Viewer">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <button id="modal-close" class="modal-close-btn" aria-label="Close photo view">&times;</button>
+      <div class="modal-polaroid">
+        <div class="modal-image-container">
+          <img id="modal-img" src="" alt="Enlarged photo">
+        </div>
+        <div class="modal-caption-area">
+          <p id="modal-caption" class="modal-caption-text"></p>
+          <span id="modal-tag" class="modal-tag-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "birthday-surprise",
+  "version": "1.0.0",
+  "description": "An interactive romantic birthday surprise website for Mas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "birthday",
+    "surprise",
+    "interactive"
+  ],
+  "author": "",
+  "license": "ISC"
+}
